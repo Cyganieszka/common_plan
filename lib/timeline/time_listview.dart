@@ -34,13 +34,26 @@ class TimeListView extends StatelessWidget{
   final int allDaySlots;
   final List<Widget> allDayWidgets;
 
-  static double getPixelPerHour(double height,TimeOfDay startTime, TimeOfDay endTime){
-    return height / ((timeToDouble(endTime.hour, endTime.minute) - timeToDouble(startTime.hour, startTime.minute))/60);
+  static double getPixelPerHour(double height,TimeOfDay startTime, TimeOfDay endTime,int allDaySlots){
+    return (height-(allDaySlots*20)) / ((timeToDouble(endTime.hour, endTime.minute) - timeToDouble(startTime.hour, startTime.minute))/60);
+  }
+
+  static TimeOfDay getCorrectedStartTime(TimeOfDay start,int allDaySlots){
+    for(int i=0;i<allDaySlots;i++){
+      int hour=start.hour;
+      int minute=start.minute;
+      if(minute<15){
+        start=TimeOfDay(hour: hour-1,minute: 45);
+      }else{
+        start=TimeOfDay(hour: hour,minute: minute-15);
+      }
+    }
+    return start;
   }
 
   TimeListView(List<TimeBounded> b, this.widgets,this.startTime,this.endTime,this.height,this.width,{this.overlap = false,this.allDaySlots=0,this.allDayWidgets}):
         bounds= checkOverlapping(b,overlap,startTime,endTime),
-        pixelsPerHour= getPixelPerHour(height, startTime, endTime){
+        pixelsPerHour= getPixelPerHour(height, startTime, endTime,allDaySlots){
 
     assert(bounds!=null && widgets!=null);
     assert(bounds.length==widgets.length);
@@ -104,8 +117,17 @@ class TimeListView extends StatelessWidget{
     }
 
 
-    return Stack(
-      children: elements,
+    return Column(
+      children: [
+        if(allDaySlots>0)Container(
+          height: (allDaySlots*20.0),
+        ),
+        Expanded(
+          child: Stack(
+            children: elements,
+          ),
+        ),
+      ],
     );
 
   }

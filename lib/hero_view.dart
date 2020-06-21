@@ -211,7 +211,6 @@ class _HeroViewState extends State<HeroView>
       hours.add(TimeOfDay(hour:h,minute: 0));
     }
 
-
     return Container(
       width: 20,
       child: LayoutBuilder(
@@ -219,7 +218,7 @@ class _HeroViewState extends State<HeroView>
             return Column(
               children: <Widget>[
                 Expanded(
-                  child: TimelineBackground(start, end, constraints.maxHeight, widget.timeColumnWidth,hours),
+                  child: TimelineBackground(start, end, constraints.maxHeight, widget.timeColumnWidth,hours,allDaySlots: plan.getAllDayEventsForSelectedWeek(widget.dateModel.selectedDay),),
                 ),
               ],
             );

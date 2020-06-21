@@ -7,6 +7,7 @@ abstract class PlanInterface {
 
   TimeOfDay getStartTimeForSelectedWeek(DateTime day);
   TimeOfDay getEndTimeForSelectedWeek(DateTime day);
+  int getAllDayEventsForSelectedWeek(DateTime day);
 
   Map<DateTime, List<Event>>  getWeekPlan(DateTime day);
 
