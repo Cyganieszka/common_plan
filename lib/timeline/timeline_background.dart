@@ -58,19 +58,6 @@ class TimelineBackground extends StatelessWidget {
       hours.add(EmptyBounds.time(
           timeQ1, TimeOfDay(hour: start.hour + i + 1, minute: 0)));
       hourWidgets.add(Container(
-//        decoration: BoxDecoration(
-//            border: Border(
-//          top: BorderSide(
-//            color: Colors.grey.withAlpha(100),
-//            width: 1.0,
-//          ),
-//          bottom: i == d.inHours - 1
-//              ? BorderSide(
-//                  color: Colors.grey.withAlpha(100),
-//                  width: 2.0,
-//                )
-//              : BorderSide.none,
-//        )),
         child: show15min
             ? Stack(
                 children: <Widget>[
@@ -82,7 +69,6 @@ class TimelineBackground extends StatelessWidget {
                             ? buildHour(start.hour + i)
                             : Container(),
                         decoration: BoxDecoration(
-//                        color:  Colors.red,
                             border: Border(
                               top: thickBorder
                             ))),
@@ -93,7 +79,6 @@ class TimelineBackground extends StatelessWidget {
                               ? buildHour(start.hour + i)
                               : Container(),
                           decoration: BoxDecoration(
-//                        color:  Colors.red,
                               border: Border(
                             top: thinBorder
                           )),
@@ -105,7 +90,6 @@ class TimelineBackground extends StatelessWidget {
                               ? buildHour(start.hour + i)
                               : Container(),
                           decoration: BoxDecoration(
-//                      color: isHighlighted && highlightQuarter==1? Colors.red:Colors.transparent,
                               border: Border(
                             top: thinBorder,
                           )),
@@ -117,7 +101,6 @@ class TimelineBackground extends StatelessWidget {
                               ? buildHour(start.hour + i)
                               : Container(),
                           decoration: BoxDecoration(
-//                      color: isHighlighted && highlightQuarter==2 ? Colors.red:Colors.transparent,
                               border: Border(
                             top: thinBorder,
                           )),

@@ -5,7 +5,20 @@ import 'package:flutter/material.dart';
 abstract class Event extends TimeBounded{
   final String title;
   final Color color;
-  Event(DateTime from, DateTime to, this.title,this.color) : super(from, to);
+  final bool allDay;
+  final bool multiday;
+  Event(DateTime from, DateTime to, this.title,this.color) : allDay= "${from.hour}${from.minute}"=="00:00" && "${to.hour}${to.minute}"=="00:00", multiday = "${from.year}${from.day}${from.month}"!="${to.year}${to.day}${to.month}" && from.difference(to).inHours>24, super(from, to);
+
+  List<DateTime> getDays(){
+    DateTime marker=DateTime(from.year,from.month,from.day);
+    List<DateTime> days=[];
+    while(marker.isBefore(to)){
+      days.add(marker);
+      marker=marker.add(Duration(days: 1));
+    }
+    return days;
+  }
+
 }
 
 class EmptyBounds extends TimeBounded{
@@ -53,6 +66,9 @@ class EmptyBounds extends TimeBounded{
   String getEndTimeString(){
     return getPaddedString(timeFrame.to.hour)+":"+getPaddedString(timeFrame.to.minute);
   }
+
+  TimeOfDay get startTime => TimeOfDay(hour: from.hour,minute: from.minute);
+  TimeOfDay get endTime => TimeOfDay(hour: to.hour,minute: to.minute);
 
   DateTime get to {
     return timeFrame.to;

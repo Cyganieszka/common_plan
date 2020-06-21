@@ -2,7 +2,7 @@ name: common_plan
 description: common plan module
 version: 0.0.1
 author:
-homepage:
+#homepage:
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
