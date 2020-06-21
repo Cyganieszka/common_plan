@@ -121,6 +121,9 @@ class TimeListView extends StatelessWidget{
       children: [
         if(allDaySlots>0)Container(
           height: (allDaySlots*20.0),
+          child: Column(
+            children: allDayWidgets.map((e) => Expanded(child: e,flex: 1,)).toList(),
+          ),
         ),
         Expanded(
           child: Stack(
