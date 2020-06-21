@@ -7,7 +7,7 @@ abstract class Event extends TimeBounded{
   final Color color;
   final bool allDay;
   final bool multiday;
-  Event(DateTime from, DateTime to, this.title,this.color) : allDay= "${from.hour}${from.minute}"=="00:00" && "${to.hour}${to.minute}"=="00:00", multiday = "${from.year}${from.day}${from.month}"!="${to.year}${to.day}${to.month}" && from.difference(to).inHours>24, super(from, to);
+  Event(DateTime from, DateTime to, this.title,this.color) : allDay= "${from.hour}${from.minute}"=="0000" && "${to.hour}${to.minute}"=="0000", multiday = "${from.year}${from.day}${from.month}"!="${to.year}${to.day}${to.month}" && from.difference(to).inHours>24, super(from, to);
 
   List<DateTime> getDays(){
     DateTime marker=DateTime(from.year,from.month,from.day);
