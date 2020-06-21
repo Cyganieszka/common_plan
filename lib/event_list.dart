@@ -32,7 +32,7 @@ abstract class EventList<T extends Event> extends StatelessWidget {
 
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
-          return TimeListView(hourlyEvents,tileList, timelineStart,timelineEnd,constraints.maxHeight,constraints.maxWidth,allDayWidgets: allDayTileList,allDaySlots: allDaySlots,);
+          return TimeListView(hourlyEvents,tileList, timelineStart,timelineEnd,constraints.maxHeight,constraints.maxWidth,allDay: allDayTileList,allDaySlots: allDaySlots,);
         }
     );
   }

@@ -51,7 +51,8 @@ class TimeListView extends StatelessWidget{
     return start;
   }
 
-  TimeListView(List<TimeBounded> b, this.widgets,this.startTime,this.endTime,this.height,this.width,{this.overlap = false,this.allDaySlots=0,this.allDayWidgets}):
+  TimeListView(List<TimeBounded> b, this.widgets,this.startTime,this.endTime,this.height,this.width,{this.overlap = false,this.allDaySlots=0, List<Widget> allDay}):
+        allDayWidgets = allDay ?? [],
         bounds= checkOverlapping(b,overlap,startTime,endTime),
         pixelsPerHour= getPixelPerHour(height, startTime, endTime,allDaySlots){
 
