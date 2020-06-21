@@ -4,6 +4,7 @@ import 'entities.dart';
 import 'tile.dart';
 import 'timeline/time_listview.dart';
 
+
 abstract class EventList<T extends Event> extends StatelessWidget {
   final List<T> events;
   final bool isDetailed;

@@ -17,10 +17,11 @@ abstract class WeekView extends StatelessWidget {
   final TimeOfDay startTime;
   final TimeOfDay endTime;
   final double headerMargin;
+  final int allDayEvents;
 
-  WeekView(this.weekNo,this.weeklyPlan,this.onDayTouched,this.keys,this.startTime,this.endTime,{this.headerMargin=0});
+  WeekView(this.weekNo,this.weeklyPlan,this.onDayTouched,this.keys,this.startTime,this.endTime,{this.headerMargin=0,this.allDayEvents=0});
 
-  DayView buildWeekDayView(List<Event> events, DateTime day);
+  DayView buildWeekDayView(List<Event> events, DateTime day,int allDayEvents);
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -45,7 +46,7 @@ abstract class WeekView extends StatelessWidget {
                       children: <Widget>[
                         RectGetter(
                           key: keys[day.weekday-1],
-                          child: buildWeekDayView(events,day),
+                          child: buildWeekDayView(events,day,allDayEvents),
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(0,0,0,0),
