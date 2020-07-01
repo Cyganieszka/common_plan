@@ -50,8 +50,9 @@ class TimelineBackground extends StatelessWidget {
     List<EmptyBounds> hours = List();
     List<Widget> hourWidgets = List();
 
+    int maxHours = (d.inMinutes/60).ceil();
 
-    for (int i = 0; i < d.inHours; i++) {
+    for (int i = 0; i < maxHours; i++) {
       TimeOfDay timeQ1 = TimeOfDay(hour: start.hour + i, minute: 0);
       TimeOfDay timeQ2 = TimeOfDay(hour: start.hour + i, minute: 15);
       TimeOfDay timeQ3 = TimeOfDay(hour: start.hour + i, minute: 30);
