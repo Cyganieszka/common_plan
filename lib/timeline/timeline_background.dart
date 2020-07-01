@@ -31,7 +31,8 @@ class TimelineBackground extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [Expanded(
-        child: Center(
+        child: Align(
+          alignment: Alignment.topCenter,
           child: AutoSizeText(
             "${(hour).toString().padLeft(2, "0")}",
             style: TextStyle(
