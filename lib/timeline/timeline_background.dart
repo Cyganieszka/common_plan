@@ -33,13 +33,16 @@ class TimelineBackground extends StatelessWidget {
       children: [Expanded(
         child: Align(
           alignment: Alignment.topCenter,
-          child: AutoSizeText(
-            "${(hour).toString().padLeft(2, "0")}",
-            style: TextStyle(
-                fontSize: 13,
-                fontWeight: FontWeight.w300),
-            minFontSize: 8,
-            maxFontSize: 13,
+          child: AspectRatio(
+            aspectRatio: 1,
+            child: AutoSizeText(
+              "${(hour).toString().padLeft(2, "0")}",
+              style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w300),
+              minFontSize: 8,
+              maxFontSize: 13,
+            ),
           ),
         ),
       )],
