@@ -22,6 +22,7 @@ abstract class WeekView extends StatelessWidget {
   WeekView(this.weekNo,this.weeklyPlan,this.onDayTouched,this.keys,this.startTime,this.endTime,{this.headerMargin=0,this.allDayEvents=0});
 
   DayView buildWeekDayView(List<Event> events, DateTime day,int allDayEvents);
+
   @override
   Widget build(BuildContext context) {
     return Row(

@@ -14,13 +14,16 @@ abstract class HeroView extends StatefulWidget {
   final double headerHeight;
   final double bottomMargin;
   final double timeColumnWidth;
+  final double allDayHeight;
 
-  HeroView(this.planModel,this.dateModel,{this.headerHeight=35,this.bottomMargin=20,this.timeColumnWidth=20});
+  HeroView(this.planModel,this.dateModel,{this.headerHeight=35,this.allDayHeight= 60,this.bottomMargin=20,this.timeColumnWidth=20});
 
   Widget buildTimeLine(PlanInterface plan,{bool quater= true,bool hours=false});
-  Widget buildDayView(PageController weekController,PageController dayController,List dayKeys, bool isDayViewVisible);
+
   Widget buildWeekHeader(PlanInterface plan,List weekKeys, PageController headerController,Function showDayView);
+  Widget buildAllDayHeader(PlanInterface plan,List weekKeys, PageController headerController,Function showDayView);
   Widget buildWeekView(PageController weekController,List weekKeys, Function showDayView,bool isDayViewVisible,bool animating);
+  Widget buildDayView(PageController weekController,PageController dayController,List dayKeys, bool isDayViewVisible);
 
   Color getColorForType(String type);
 
@@ -35,6 +38,7 @@ class _HeroViewState extends State<HeroView>
 
   bool isDayViewVisible = false;
   PageController _headerController;
+  PageController _allDayController;
   PageController _weekController;
   PageController _dayController;
 
@@ -47,6 +51,7 @@ class _HeroViewState extends State<HeroView>
   void initState() {
     super.initState();
     print("INIT page for week ${widget.dateModel.pageForWeek} day: ${widget.dateModel.pageForDay}");
+    _allDayController = PageController(initialPage: widget.dateModel.pageForWeek);
     _headerController = PageController(initialPage: widget.dateModel.pageForWeek);
     _weekController = PageController(initialPage: widget.dateModel.pageForWeek)
       ..addListener(_onWeekScroll);
@@ -77,6 +82,7 @@ class _HeroViewState extends State<HeroView>
   @override
   void dispose() {
     _headerController.dispose();
+    _allDayController.dispose();
     _weekController.dispose();
     _dayController.dispose();
     _animationController.dispose(); //<-- Remember to dispose the controller
@@ -176,11 +182,27 @@ class _HeroViewState extends State<HeroView>
       },
       child: Stack(
         children: <Widget>[
-          Positioned(child: _buildHoursLine(widget.planModel),left:0,top: widget.headerHeight,bottom: widget.bottomMargin,),
-          Positioned.fill(child: widget.buildWeekHeader(widget.planModel,weekKeys,_headerController,_showDayView),left: widget.timeColumnWidth,top: 0,),
-          Positioned.fill(child: widget.buildTimeLine(widget.planModel),left: widget.timeColumnWidth,top: widget.headerHeight,bottom: widget.bottomMargin,),
-          Positioned.fill(child: widget.buildWeekView(_weekController,weekKeys,_showDayView,isDayViewVisible,animating),left: widget.timeColumnWidth,top: 0,bottom: widget.bottomMargin,),
-          Positioned.fill(child: widget.buildDayView(_weekController,_dayController,dayKeys,isDayViewVisible),left:widget.timeColumnWidth,top: 0,bottom: widget.bottomMargin,),
+          Positioned(child: _buildHoursLine(widget.planModel),left:0,
+            top: widget.headerHeight+widget.allDayHeight,
+            bottom: widget.bottomMargin,),
+          Positioned.fill(child: widget.buildWeekHeader(widget.planModel,weekKeys,_headerController,_showDayView),
+            left: widget.timeColumnWidth,
+            top: widget.allDayHeight,),
+          Positioned.fill(child: widget.buildAllDayHeader(widget.planModel,weekKeys,_allDayController,_showDayView),
+            left: widget.timeColumnWidth,
+            top: 0,),
+          Positioned.fill(child: widget.buildTimeLine(widget.planModel),
+            left: widget.timeColumnWidth,
+            top: widget.headerHeight+widget.allDayHeight,
+            bottom: widget.bottomMargin,),
+          Positioned.fill(child: widget.buildWeekView(_weekController,weekKeys,_showDayView,isDayViewVisible,animating),
+            left: widget.timeColumnWidth,
+            top: 0,
+            bottom: widget.bottomMargin,),
+          Positioned.fill(child: widget.buildDayView(_weekController,_dayController,dayKeys,isDayViewVisible),
+            left:widget.timeColumnWidth,
+            top: 0,
+            bottom: widget.bottomMargin,),
           // <--- build PageView ON TOP of GridView
         ],
       ),

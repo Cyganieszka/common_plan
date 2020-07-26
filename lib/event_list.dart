@@ -19,7 +19,7 @@ abstract class EventList<T extends Event> extends StatelessWidget {
   Widget getList() {
     List<Widget> tileList = List();
     List<Widget> allDayTileList = List();
-    List<Widget> multiDayTileList = List();
+
     List<T> hourlyEvents=List();
     for (int i = 0; i < events.length; i++) {
       var event = events[i];
