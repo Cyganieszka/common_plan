@@ -226,6 +226,7 @@ class _HeroViewState extends State<HeroView>
 
   _onWeekScroll() {
     _headerController.jumpTo(_weekController.offset);
+    _allDayController.jumpTo(_weekController.offset);
   }
 
   Widget _buildHoursLine(PlanInterface plan,{bool quater= true,bool hours=false}) {
