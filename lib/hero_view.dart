@@ -181,6 +181,7 @@ class _HeroViewState extends State<HeroView>
         return true; // <--- otherwise close the app
       },
       child: Stack(
+        fit: StackFit.expand,
         children: <Widget>[
           Positioned(child: _buildHoursLine(widget.planModel),left:0,
             top: widget.headerHeight+widget.allDayHeight,
