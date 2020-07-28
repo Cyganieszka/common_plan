@@ -11,10 +11,9 @@ class TimelineBackground extends StatelessWidget {
   final bool show15min;
   final double height, width;
   final List<TimeOfDay> hoursToDisplay;
-  final int allDaySlots;
 
   TimelineBackground(this.start, this.end, this.height, this.width,this.hoursToDisplay,
-      {this.show15min = true,this.allDaySlots=0})
+      {this.show15min = true})
       : d = maxDayPlanDuration(start, end);
 
   final BorderSide thinBorder = BorderSide(
@@ -128,7 +127,6 @@ class TimelineBackground extends StatelessWidget {
       height,
       width,
       overlap: true,
-      allDaySlots: allDaySlots,
     );
   }
 }

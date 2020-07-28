@@ -30,10 +30,6 @@ class TimeListView extends StatelessWidget{
   final TimeOfDay endTime;
   final bool overlap;
   final double pixelsPerHour;
-  final double allDaySlotHeight;
-
-  final int allDaySlots;
-  final List<Widget> allDayWidgets;
 
   static double getPixelPerHour(double height,TimeOfDay startTime, TimeOfDay endTime){
     return height / ((timeToDouble(endTime.hour, endTime.minute) - timeToDouble(startTime.hour, startTime.minute))/60);
@@ -52,10 +48,9 @@ class TimeListView extends StatelessWidget{
     return start;
   }
 
-  TimeListView(List<TimeBounded> b, this.widgets,this.startTime,this.endTime,this.height,this.width,{this.overlap = false,this.allDaySlots=0,this.allDaySlotHeight=30, List<Widget> allDay}):
-        allDayWidgets = allDay ?? [],
+  TimeListView(List<TimeBounded> b, this.widgets,this.startTime,this.endTime,this.height,this.width,{this.overlap = false}):
         bounds= checkOverlapping(b,overlap,startTime,endTime),
-        pixelsPerHour= getPixelPerHour(height-(allDaySlots*allDaySlotHeight), startTime, endTime){
+        pixelsPerHour= getPixelPerHour(height, startTime, endTime){
 
     assert(bounds!=null && widgets!=null);
     assert(bounds.length==widgets.length);
@@ -121,14 +116,6 @@ class TimeListView extends StatelessWidget{
 
     return Column(
       children: [
-        if(allDaySlots>0)Container(
-          height: (allDaySlots*allDaySlotHeight),
-          decoration: BoxDecoration(color:Colors.grey.withAlpha(100)),
-          child: Column(
-            crossAxisAlignment:CrossAxisAlignment.stretch,
-            children: allDayWidgets.map((e) => Expanded(child: e,flex: 1,)).toList(),
-          ),
-        ),
         Expanded(
           child: Stack(
             children: elements,

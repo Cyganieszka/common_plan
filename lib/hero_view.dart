@@ -247,7 +247,7 @@ class _HeroViewState extends State<HeroView>
             return Column(
               children: <Widget>[
                 Expanded(
-                  child: TimelineBackground(start, end, constraints.maxHeight, widget.timeColumnWidth,hours,allDaySlots: plan.getAllDayEventsForSelectedWeek(widget.dateModel.selectedDay),),
+                  child: TimelineBackground(start, end, constraints.maxHeight, widget.timeColumnWidth,hours),
                 ),
               ],
             );
