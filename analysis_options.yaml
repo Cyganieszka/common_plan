@@ -1,0 +1,12 @@
+include: package:pedantic/analysis_options.1.8.0.yaml
+
+
+analyzer:
+  enable-experiment:
+#    - non-nullable //todo
+    - extension-methods
+
+linter:
+  rules:
+    - camel_case_types
+    - spread-collections

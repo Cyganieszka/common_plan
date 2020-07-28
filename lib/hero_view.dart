@@ -24,6 +24,7 @@ abstract class HeroView extends StatefulWidget {
   Widget buildAllDayHeader(PlanInterface plan,List weekKeys, PageController headerController,Function showDayView);
   Widget buildWeekView(PageController weekController,List weekKeys, Function showDayView,bool isDayViewVisible,bool animating);
   Widget buildDayView(PageController weekController,PageController dayController,List dayKeys, bool isDayViewVisible);
+  Widget buildDayViewForAnimation();
 
   Color getColorForType(String type);
 
@@ -118,36 +119,9 @@ class _HeroViewState extends State<HeroView>
   OverlayEntry createOverlayEntry() {
     return OverlayEntry(
       builder: (context) {
-        DateTime day = widget.dateModel.selectedDay;
 
-        List<Widget> elements = List();
-        for (int i = 0; i < widget.planModel.getDayPlan(day).length; i++) {
-          elements.add(
-              Tile.empty(
-                  color:widget.planModel.getDayPlan(day)[i].color
-              )
-          );
-        }
 
-        Widget dayView = Padding(
-            padding: EdgeInsets.fromLTRB(0, widget.headerHeight, 0, 0),
-            child:
-            LayoutBuilder(builder:
-                (BuildContext context, BoxConstraints constraints) {
-              return Column(
-                children: <Widget>[
-                  Expanded(
-                    child: TimeListView(
-                        widget.planModel.getDayPlan(day),
-                        elements,
-                        widget.planModel.getStartTimeForSelectedWeek(widget.dateModel.selectedDay),
-                        widget.planModel.getEndTimeForSelectedWeek(widget.dateModel.selectedDay),
-                        constraints.maxHeight,
-                        constraints.maxWidth),
-                  ),
-                ],
-              );
-            }));
+        Widget dayView = widget.buildDayViewForAnimation();
 
         return AnimatedBuilder(
           //<-- rebuild when animation changes
